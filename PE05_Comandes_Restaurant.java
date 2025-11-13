@@ -95,7 +95,7 @@ public class PE05_Comandes_Restaurant {
         while (continuar) {
             try {
                 System.out.println(cian + "Introdueix el producte: " + reset);
-                String producte = e.next();
+                String producte = e.nextLine();
 
                 System.out.println(cian + "Preu unitari ($): " + reset);
                 double preu = e.nextDouble();
@@ -105,11 +105,21 @@ public class PE05_Comandes_Restaurant {
 
                 double subtotal = preu * quantitat;
                 totalSenseIVA += subtotal; //+= serveix per afegir contingut a una variable, sumant si és un número o concatenant text si és un String.
-                comanda += String.format("%-15s %3d x %.2f$ = %.2f$\n", producte, quantitat, preu, subtotal);
+
+                // Afegir espais fins a 17 caràcters amb un for
+                 String linia = producte;
+                for (int i = producte.length(); i < 17; i++) {
+                linia += " ";
+                }
+
+                comanda += String.format("%-15s %-10d %-12.2f %-10.2f\n", producte, quantitat, preu, subtotal);
+
+                e.nextLine(); 
 
                 System.out.println(groc + "Vols afegir un altre producte? (s/n): " + reset );
                 continuar = e.next().equalsIgnoreCase("s");
 
+                e.nextLine();
             } catch (InputMismatchException ex) {
                 System.out.println(vermell + "Error: introdueix valors vàlids!" + reset);
                 e.nextLine();
@@ -126,13 +136,15 @@ public class PE05_Comandes_Restaurant {
         double iva = totalSenseIVA * IVA;
         double total = totalSenseIVA + iva;
 
-        System.out.println(cian + "\n ============== Tiquet ==============");
-        System.out.println("Client " + nomClient);
-        System.out.println("----------------------------------");
-        System.out.println(comanda);
-        System.out.println("----------------------------------");
-        System.out.printf("Total sense IVA: %.2f$\n", totalSenseIVA);
-        System.out.printf("IVA (10%%): %.2f$\n", iva);
-        System.out.println("==================================" + reset);
+
+    System.out.println(cian + "\n ============== Tiquet ==============");
+    System.out.println("Client: " + nomClient);
+    System.out.println("----------------------------------");
+    System.out.println(comanda); 
+    System.out.println("----------------------------------");
+    System.out.printf("Total sense IVA: %.2f$\n", totalSenseIVA);
+    System.out.printf("IVA (10%%): %.2f$\n", iva);
+    System.out.printf("Total amb IVA: %.2f$\n", total);
+    System.out.println("==================================" + reset);
     }
 }
