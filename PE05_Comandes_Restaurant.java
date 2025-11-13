@@ -71,6 +71,18 @@ public class PE05_Comandes_Restaurant {
         System.out.println("Comanda enregistrada correctament");
     }
 
+    public void actualitzarComanda() {
+        if (nomClient.isEmpty()) {
+            System.out.println("No hi ha cap comanda enregistrada...");
+            return;
+        }
+
+        System.out.println("======= Actualitzar comanda =======");
+        introduirProductes();
+        mostrarTiquet();
+        System.out.println("Comanda actualitzada correctament!");
+    }
+
     
 
 
