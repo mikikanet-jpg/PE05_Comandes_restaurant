@@ -13,6 +13,11 @@ public class PE05_Comandes_Restaurant {
     double totalSenseIVA = 0.0;
     final double IVA= 0.10;
 
+    String reset = "\u001B[0m";
+    String vermell = "\u001B[31m";
+    String cian = "\u001B[36m";
+    String groc = "\u001B[33m";
+
      public static void main(String[] args) {
         PE05_Comandes_Restaurant p = new PE05_Comandes_Restaurant();
         p.inici();
@@ -21,14 +26,14 @@ public class PE05_Comandes_Restaurant {
         int opcio = 0;
         do {
             try {
-                System.out.println("\n_______________________________________");
+                System.out.println(cian + "\n_______________________________________");
                 System.out.println("===== Gestió comandes restaurant ======");
                 System.out.println("_______________________________________");
                 System.out.println("1. Crear nova comanda");
                 System.out.println("2. Actualitzar comanda anterior");
                 System.out.println("3. Visualitzar últim tiquet");
                 System.out.println("4. Sortir");
-                System.out.println("Tria una opció: ");
+                System.out.println("Tria una opció: " + reset);
                 opcio = e.nextInt();
 
                 switch (opcio) {
@@ -42,16 +47,16 @@ public class PE05_Comandes_Restaurant {
                         mostrarTiquet();
                     break;
                     case 4:
-                        System.out.println("______________________________________");
+                        System.out.println(groc + "______________________________________");
                         System.out.println("========== Fins La Propera! ==========");
-                        System.out.println("______________________________________");
+                        System.out.println("______________________________________" + reset);
                     break;
                     default:
-                        System.out.println("Opció no valida.");
+                        System.out.println(vermell + "Opció no valida." + reset);
                 }
 
             } catch (InputMismatchException ex) {
-               System.out.println("Error: introdueix un número vàlid!");
+               System.out.println(vermell + "Error: introdueix un número vàlid!" + reset);
                e.nextLine();
             }
         } while (opcio != 4);
@@ -60,9 +65,9 @@ public class PE05_Comandes_Restaurant {
     }
 
     public void novaComanda() {
-        System.out.println("\n=========== Nova Comanda ===========");
+        System.out.println(cian + "\n=========== Nova Comanda ===========" + reset);
         e.nextLine();
-        System.out.println("Nom del client: ");
+        System.out.println(cian + "Nom del client: " + reset);
         nomClient = e.nextLine();
 
         comanda = "";
@@ -70,43 +75,43 @@ public class PE05_Comandes_Restaurant {
 
         introduirProductes();
         mostrarTiquet();
-        System.out.println("Comanda enregistrada correctament");
+        System.out.println(cian + "Comanda enregistrada correctament" + reset);
     }
 
     public void actualitzarComanda() {
         if (nomClient.isEmpty()) {
-            System.out.println("No hi ha cap comanda enregistrada...");
+            System.out.println(vermell + "No hi ha cap comanda enregistrada..." + reset);
             return;
         }
 
-        System.out.println("======= Actualitzar comanda =======");
+        System.out.println(cian + "======= Actualitzar comanda =======" + reset);
         introduirProductes();
         mostrarTiquet();
-        System.out.println("Comanda actualitzada correctament!");
+        System.out.println(cian + "Comanda actualitzada correctament!" + reset);
     }
 
     public void introduirProductes() {
         boolean continuar = true;
         while (continuar) {
             try {
-                System.out.println("Introdueix el producte: ");
+                System.out.println(cian + "Introdueix el producte: " + reset);
                 String producte = e.next();
 
-                System.out.println("Preu unitari ($): ");
+                System.out.println(cian + "Preu unitari ($): " + reset);
                 double preu = e.nextDouble();
 
-                System.out.println("Quantitat: ");
+                System.out.println(cian + "Quantitat: " + reset);
                 int quantitat= e.nextInt();
 
                 double subtotal = preu * quantitat;
                 totalSenseIVA += subtotal; //+= serveix per afegir contingut a una variable, sumant si és un número o concatenant text si és un String.
                 comanda += String.format("%-15s %3d x %.2f$ = %.2f$\n", producte, quantitat, preu, subtotal);
 
-                System.out.println("Vols afegir un altre producte? (s/n): ");
+                System.out.println(groc + "Vols afegir un altre producte? (s/n): " + reset );
                 continuar = e.next().equalsIgnoreCase("s");
 
             } catch (InputMismatchException ex) {
-                System.out.println("Error: introdueix valors vàlids!");
+                System.out.println(vermell + "Error: introdueix valors vàlids!" + reset);
                 e.nextLine();
             }
         }
@@ -114,20 +119,20 @@ public class PE05_Comandes_Restaurant {
 
     public void mostrarTiquet() {
         if (nomClient.isEmpty()) {
-            System.out.println("No hi ha cap comanda enregistrada.");
+            System.out.println( vermell + "No hi ha cap comanda enregistrada..." + reset);
             return;
         }
 
         double iva = totalSenseIVA * IVA;
         double total = totalSenseIVA + iva;
 
-        System.out.println("\n ============== Tiquet ==============");
+        System.out.println(cian + "\n ============== Tiquet ==============");
         System.out.println("Client " + nomClient);
         System.out.println("----------------------------------");
         System.out.println(comanda);
         System.out.println("----------------------------------");
         System.out.printf("Total sense IVA: %.2f$\n", totalSenseIVA);
         System.out.printf("IVA (10%%): %.2f$\n", iva);
-        System.out.println("==================================");
+        System.out.println("==================================" + reset);
     }
 }
