@@ -33,7 +33,7 @@ public class PE05_Comandes_Restaurant {
 
                 switch (opcio) {
                     case 1:
-                        novacomanda();
+                        novaComanda();
                     break;
                     case 2:
                         actualitzarComanda();
@@ -57,9 +57,21 @@ public class PE05_Comandes_Restaurant {
         e.close();
     }
 
+    public void novaComanda() {
+        System.out.println("\n=========== Nova Comanda ===========");
+        e.nextLine();
+        System.out.println("Nom del client: ");
+        nomClient = e.nextLine();
+
+        comanda = "";
+        totalSenseIVA = 0.0;
+
+        introduirProductes();
+        mostrarTiquet();
+        System.out.println("Comanda enregistrada correctament");
+    }
+
     
-
-
 
 
 
