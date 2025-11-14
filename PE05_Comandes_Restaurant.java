@@ -144,6 +144,7 @@ public class PE05_Comandes_Restaurant {
 
     System.out.println(cian + "\n ============== Tiquet ==============");
     System.out.println("Client: " + nomClient);
+    System.out.println("Producte        Quantitat   Preu unit.   Subtotal");
     System.out.println("----------------------------------");
     System.out.println(comanda); 
     System.out.println("----------------------------------");
